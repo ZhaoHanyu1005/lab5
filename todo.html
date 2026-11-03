@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List LocalStorage</title>
+</head>
+<body>
+    <h3>Todo List</h3>
+    <input type="text" id="todoInput" placeholder="Enter new task">
+    <button onclick="addTodo()">Add Task</button>
+    <ul id="todoList"></ul>
+
+    <script>
+        let todos = JSON.parse(localStorage.getItem("todos")) || [];
+        const listEl = document.getElementById("todoList");
+        const inputEl = document.getElementById("todoInput");
+        function render() {
+            listEl.innerHTML = "";
+            todos.forEach((item, index)=>{
+                let li = document.createElement("li");
+                li.innerText = item + " ";
+                let delBtn = document.createElement("button");
+                delBtn.innerText = "Delete";
+                delBtn.onclick = ()=>{
+                    todos.splice(index,1);
+                    save();
+                    render();
+                };
+                li.appendChild(delBtn);
+                listEl.appendChild(li);
+            })
+        }
+        function save(){
+            localStorage.setItem("todos", JSON.stringify(todos));
+        }
+        function addTodo(){
+            let val = inputEl.value.trim();
+            if(val){
+                todos.push(val);
+                save();
+                render();
+                inputEl.value = "";
+            }
+        }
+        render();
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas Smiley</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="900" height="950"></canvas>
+    <script>
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // 浅绿色背景
+        ctx.fillStyle = "#89e889";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+
+        // 黄色圆脸
+        ctx.beginPath();
+        ctx.arc(450, 420, 320, 0, Math.PI*2);
+        ctx.fillStyle = "#fff100";
+        ctx.fill();
+        ctx.stroke();
+
+        // 左眼
+        ctx.beginPath();
+        ctx.arc(300,340,30,0,Math.PI*2);
+        ctx.fillStyle="#000000";
+        ctx.fill();
+
+        //右眼
+        ctx.beginPath();
+        ctx.arc(600,340,30,0,Math.PI*2);
+        ctx.fill();
+
+        //鼻子竖线
+        ctx.beginPath();
+        ctx.moveTo(450,420);
+        ctx.lineTo(450,520);
+        ctx.stroke();
+
+        //微笑嘴巴
+        ctx.beginPath();
+        ctx.arc(450,470,160, 0.2*Math.PI, 0.8*Math.PI);
+        ctx.stroke();
+
+        //底部文字
+        ctx.font = "bold 42px sans-serif";
+        ctx.fillStyle="#007700";
+        ctx.fillText("The Canvas brought me to life!", 60, 910);
+    </script>
+</body>
+</html>
